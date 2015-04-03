@@ -1,10 +1,13 @@
 Free Checker
 ============
-__Usage__ 
 
-  ./freeChecker.sh
+Usage
+-------
 
-__Description__
+    ./freeChecker.sh
+
+Description
+------------
 
   Simple free checker (for C program) using LD_PRELOAD.
   It helps for programmer to find memory-leak bug!
