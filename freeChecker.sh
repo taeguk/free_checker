@@ -16,7 +16,7 @@ so_file=$(dirname $0)"/fc.so"
 echo "----------free check start----------"
 
 if [ "$#" -eq "0" ]; then
-	echo "[Usage] $0 target_program target_program_parameters"
+	echo "[Usage] freeChecker.sh target_program target_program_parameters"
 else
 	cmd="LD_PRELOAD=$so_file $@"
 	eval $cmd
