@@ -39,14 +39,16 @@ void __attribute__((destructor)) finish_hooking()
 void* malloc(size_t size)
 {
 	void* ret = malloc_real(size);
-	fprintf(stderr, "[malloc Call #%lld (%u)] %p \n", ++mallocCallNum, (unsigned int) size, ret);
+	fprintf(stderr, "[malloc Call #%lld (%u)] %p ", ++mallocCallNum, (unsigned int) size, ret);
+	fprintf(stderr, "(free memory : %lld / %lld) \n", freeCallNum, mallocCallNum + callocCallNum);
 	return ret;
 }
 
 void* calloc(size_t num, size_t size)
 {
 	void* ret = calloc_real(num,size);
-	fprintf(stderr, "[calloc Call #%lld (%u, %u)] %p \n", ++callocCallNum, (unsigned int) num, (unsigned int) size, ret);
+	fprintf(stderr, "[calloc Call #%lld (%u, %u)] %p ", ++callocCallNum, (unsigned int) num, (unsigned int) size, ret);
+	fprintf(stderr, "(free memory : %lld / %lld) \n", freeCallNum, mallocCallNum + callocCallNum);
 	return ret;
 }
 
@@ -54,6 +56,7 @@ void free(void *ptr)
 {
 	if(ptr == NULL)return;
 	free_real(ptr);
-	fprintf(stderr, "[free Call #%lld] %p \n", ++freeCallNum, ptr);
+	fprintf(stderr, "[free Call #%lld] %p ", ++freeCallNum, ptr);
+	fprintf(stderr, "(free memory : %lld / %lld) \n", freeCallNum, mallocCallNum + callocCallNum);
 }
 
